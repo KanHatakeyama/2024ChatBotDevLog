@@ -1,0 +1,10 @@
+# python related
+__pycache__/
+.venv/
+.venv*/
+
+# artifact
+wandb/
+model/
+#sftlab/experiments/*
+sftlab/out_data/*

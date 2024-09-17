@@ -1,0 +1,4 @@
+output_dir: /data/2024_llm/sftlab/out_data
+hf_cache_dir: /data/hf
+wandb:
+  entity: kanhatakeyamas

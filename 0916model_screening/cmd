@@ -1,0 +1,6 @@
+#ezo
+python -m vllm.entrypoints.openai.api_server --model AXCXEPT/EZO-Common-9B-gemma-2-it
+
+
+python -m vllm.entrypoints.openai.api_server --model /data/2024_llm/sftlab/out_data/sftlab-experiments/test/1-gemma_full-zero3
+
