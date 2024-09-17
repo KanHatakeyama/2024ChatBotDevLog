@@ -1,0 +1,4 @@
+
+#upload
+huggingface-cli upload multiturn-conv-from-wagahai-neko data/ . --repo-type dataset
+

@@ -8,4 +8,4 @@ wandb/
 model/
 #sftlab/experiments/*
 sftlab/out_data/*
-0917neko_gen/data/neko_gen.jsonl
+0917neko_gen/data/neko_*
