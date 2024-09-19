@@ -437,13 +437,13 @@ def main() -> None:
     )
 
     # loss maskのcheck
-    from torch.utils.data import DataLoader
-    print("Check loss mask")
-    print(tokenizer.decode(trainer.train_dataset[0]['input_ids']))
-    loader = DataLoader(trainer.train_dataset,
-                        collate_fn=collator, batch_size=8)
-    batch = next(iter(loader))
-    print(batch['labels'][0])
+    # from torch.utils.data import DataLoader
+    # print("Check loss mask")
+    # print(tokenizer.decode(trainer.train_dataset[0]['input_ids']))
+    # loader = DataLoader(trainer.train_dataset,
+    #                    collate_fn=collator, batch_size=8)
+    # batch = next(iter(loader))
+    # print(batch['labels'][0])
 
     # train
     logger.info("Training")
