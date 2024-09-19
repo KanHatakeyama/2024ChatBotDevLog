@@ -352,6 +352,11 @@ def main() -> None:
     )
     logger.info(f"Loading model from {sft_training_args.model_name_or_path}")
     kwargs = sft_training_args.from_pretrained_kwargs(training_args)
+
+    if sft_training_args.model_name_or_path.find("gemma-2") >= 0:
+        kwargs["attn_implementation"] = 'eager'
+        kwargs["use_flash_attention_2"] = False
+
     logger.debug(
         f"AutoModelForCausalLM.from_pretrained({sft_training_args.model_name_or_path}, trust_remote_code=True, **kwargs={kwargs})"
     )
@@ -361,10 +366,12 @@ def main() -> None:
         sft_training_args.model_name_or_path,
         cache_dir=model_cache_dir,
         trust_remote_code=True,
+
+        # for gemma
         # device_map="auto",
         # device_map={'':device_string},
 
-        **kwargs,
+        ** kwargs,
     )
     # if True:
     #    for name, weight in model.named_parameters():
@@ -422,13 +429,23 @@ def main() -> None:
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
         dataset_text_field="text",
-        data_collator=collator,
+        # data_collator=collator,  #マルチターン会話でuser,assistant両方とも価値があるのでmaskしない
         peft_config=peft_config,
         max_seq_length=sft_training_args.max_seq_length,
         # NEFTune https://qiita.com/m__k/items/23ced0db6846e97d41cd
         neftune_noise_alpha=sft_training_args.param_neftune_noise_alpha,
     )
 
+    # loss maskのcheck
+    from torch.utils.data import DataLoader
+    print("Check loss mask")
+    print(tokenizer.decode(trainer.train_dataset[0]['input_ids']))
+    loader = DataLoader(trainer.train_dataset,
+                        collate_fn=collator, batch_size=8)
+    batch = next(iter(loader))
+    print(batch['labels'][0])
+
+    # train
     logger.info("Training")
     if training_args.resume_from_checkpoint:
         print("load checkpoint")
