@@ -195,6 +195,14 @@ class Preprocessor:
         # print("1", messages)
         # print("2", sample)
         # print("3", sample[messages])
+        if not add_system_message:
+            new_messages = []
+            for msg in sample[messages]:
+                if msg["role"] == "system":
+                    continue
+                new_messages.append(msg)
+            sample[messages] = new_messages
+
         result = self.tokenizer.apply_chat_template(
             sample[messages], tokenize=False)
         if add_system_message:
@@ -414,7 +422,7 @@ def main() -> None:
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
         dataset_text_field="text",
-        # data_collator=collator,
+        data_collator=collator,
         peft_config=peft_config,
         max_seq_length=sft_training_args.max_seq_length,
         # NEFTune https://qiita.com/m__k/items/23ced0db6846e97d41cd

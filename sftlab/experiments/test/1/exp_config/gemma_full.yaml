@@ -5,15 +5,15 @@ template: #使わない
   output: <end_of_turn>\n<start_of_turn>model\n
 
 data:
-   - name: kanhatakeyama/ramdom-to-fixed-multiturn-Calm3
+   - name: kanhatakeyama/multiturn-conv-from-wagahai-neko
      preprocess:
        - name: apply_chat_template
          args:
            messages: messages
            add_system_message: false
      split:
-       train: 20240806filtered[:10000]
-       eval: 20240806filtered[10500:]
+       train: train[:11000]
+       eval: train[11000:]
 
   
 model:

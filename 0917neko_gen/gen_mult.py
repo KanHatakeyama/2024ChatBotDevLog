@@ -95,7 +95,7 @@ def ask_model(messages, client):
 def gen_init_text(line, genre):
     system_list = [
         f"次の文章をもとに､{genre}のはじめのセリフを出力しなさい｡対話はタメ口で行われ､敬語は使いません｡セリフのみを出力し、それ以外は何も出力しないでください｡",
-        f"次の文章をもとに､{genre}のはじめのセリフを出力しなさい｡セリフのみを出力し、それ以外は何も出力しないでください｡",
+        f"次の文章をもとに､{genre}のはじめのセリフを出力しなさい｡対話は敬語で行われます｡セリフのみを出力し、それ以外は何も出力しないでください｡",
     ]
     system_message = random.choice(system_list)
 
@@ -123,7 +123,7 @@ def gen_text(new_lines, genres, client,
     text = gen_init_text(line, genre)
 
     system_list = [
-        f"{genre}の返答文を生成しなさい｡対話はタメ口で行われ､敬語は使いません｡セリフのみを出力し、それ以外は何も出力しないでください｡",
+        # f"{genre}の返答文を生成しなさい｡対話はタメ口で行われ､敬語は使いません｡セリフのみを出力し、それ以外は何も出力しないでください｡",
         f"{genre}の返答文を生成しなさい｡セリフのみを出力し、それ以外は何も出力しないでください｡",
     ]
     system_message = random.choice(system_list)
