@@ -25,6 +25,8 @@ ds = load_dataset("globis-university/aozorabunko-clean", split="train")
 
 
 def extract_random_text(ds):
+    seed = int(pid)+int(datetime.now().timestamp())
+    random.seed(seed)
     record = ds[random.randint(0, len(ds))]
     extract_length = random.randint(100, 300)
     try:
@@ -183,7 +185,7 @@ def gen_text(genres, client,
 out_file_path = f"data/gen_mult_{current_time_no_symbols}.jsonl"
 
 with open(out_file_path, "a") as f:
-    for i in tqdm(range(10**4)):
+    for i in tqdm(range(5*10**4)):
         try:
             messages = gen_text(genres, model, n_replies=11)
         except Exception as e:
