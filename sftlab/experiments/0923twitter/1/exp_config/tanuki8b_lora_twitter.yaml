@@ -12,8 +12,8 @@ data:
            messages: messages
            add_system_message: false
      split:
-       #train: train[:25000]
-       train: train[:250]
+       train: train[:25000]
+       #train: train[:2500]
        eval: train[25000:]
    - name: kanhatakeyama/twitter-auto_reply
      preprocess:
@@ -22,8 +22,8 @@ data:
            messages: messages
            add_system_message: false
      split:
-       train: 20240923initial[:10]
-       #train: 20240923initial[:100000]
+       #train: 20240923initial[:10]
+       train: 20240923initial[:7000000]
        eval: 20240923initial[7388000:]
    - name: kanhatakeyama/ramdom-to-fixed-multiturn-Calm3
      preprocess:
@@ -33,7 +33,7 @@ data:
            add_system_message: false
      split:
        #train: train[:10000]
-       train: 20240806filtered[:10]
+       train: 20240806filtered[:10000]
        eval: 20240806filtered[10000:10500]
 
 model:
@@ -46,11 +46,11 @@ tokenizer:
 
 exp_params:
   num_train_epochs: 1
-  per_device_train_batch_size: 2
-  per_device_eval_batch_size: 2
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
   gradient_accumulation_steps: 64
   save_strategy: steps
-  save_steps: 1000
+  save_steps: 3000
   logging_steps: 1
   learning_rate: 1e-4
   warmup_ratio: 0.1
@@ -60,7 +60,7 @@ exp_params:
   gradient_checkpointing: true
   max_seq_length: 4096
   use_peft: true
-  peft_target_model: llama-mini
+  peft_target_model: llama
   use_flash_attention_2: true
   peft_lora_r: 128
   peft_lora_alpha: 256
