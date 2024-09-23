@@ -1,0 +1,2 @@
+export LD_LIBRARY_PATH=/home/setup/miniconda3/envs/sft/lib/python3.11/site-packages/nvidia/nvjitlink/lib:$LD_LIBRARY_PATH
+python run.py gemma_full.yaml --accelerate_config zero1.yaml
