@@ -12,29 +12,9 @@ data:
            messages: messages
            add_system_message: false
      split:
-       train: train[:25000]
+       train: train[:2500]
        #train: train[:2500]
        eval: train[25000:]
-   - name: kanhatakeyama/twitter-auto_reply
-     preprocess:
-       - name: apply_chat_template
-         args:
-           messages: messages
-           add_system_message: false
-     split:
-       #train: 20240923initial[:10]
-       train: 20240923initial[:7000000]
-       eval: 20240923initial[7388000:]
-   - name: kanhatakeyama/ramdom-to-fixed-multiturn-Calm3
-     preprocess:
-       - name: apply_chat_template
-         args:
-           messages: messages
-           add_system_message: false
-     split:
-       #train: train[:10000]
-       train: 20240806filtered[:10000]
-       eval: 20240806filtered[10000:10500]
 
 model:
   name: weblab-GENIAC/Tanuki-8B-dpo-v1.0
@@ -46,8 +26,8 @@ tokenizer:
 
 exp_params:
   num_train_epochs: 1
-  per_device_train_batch_size: 6
-  per_device_eval_batch_size: 6
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 8
   gradient_accumulation_steps: 64
   save_strategy: steps
   save_steps: 3000
