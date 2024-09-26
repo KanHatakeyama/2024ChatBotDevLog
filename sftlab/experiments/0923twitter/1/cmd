@@ -2,3 +2,6 @@
 conda activate sft
 export LD_LIBRARY_PATH=/home/setup/miniconda3/envs/sft/lib/python3.11/site-packages/nvidia/nvjitlink/lib:$LD_LIBRARY_PATH
 python run.py tanuki8b_lora_twitter.yaml --accelerate_config zero1.yaml
+
+#test
+python run.py tanuki8b_lora_twitter_test.yaml --accelerate_config zero1.yaml
